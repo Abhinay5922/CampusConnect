@@ -17,7 +17,33 @@ const debugRoutes = require('./routes/debug');
 const app = express();
 const server = http.createServer(app);
 
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173' }));
+// CORS configuration for production
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      process.env.FRONTEND_URL || 'http://localhost:5173',
+      'http://localhost:5173', // Development
+      'http://localhost:3000', // Alternative dev port
+    ];
+    
+    // Add production frontend URL if it exists
+    if (process.env.PRODUCTION_FRONTEND_URL) {
+      allowedOrigins.push(process.env.PRODUCTION_FRONTEND_URL);
+    }
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan('dev')); // Log all API requests
 
@@ -68,9 +94,32 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Socket.io
+// Socket.io with production-ready CORS
 const io = new Server(server, {
-  cors: { origin: process.env.FRONTEND_URL || 'http://localhost:5173' }
+  cors: {
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps)
+      if (!origin) return callback(null, true);
+      
+      const allowedOrigins = [
+        process.env.FRONTEND_URL || 'http://localhost:5173',
+        'http://localhost:5173', // Development
+        'http://localhost:3000', // Alternative dev port
+      ];
+      
+      // Add production frontend URL if it exists
+      if (process.env.PRODUCTION_FRONTEND_URL) {
+        allowedOrigins.push(process.env.PRODUCTION_FRONTEND_URL);
+      }
+      
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true
+  }
 });
 
 const onlineUsers = new Map(); // userId -> socketId
