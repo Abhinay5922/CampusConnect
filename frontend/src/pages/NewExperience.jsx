@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Building2, Briefcase, FileText, MessageSquare, Lightbulb, ArrowLeft, Send, Loader2 } from 'lucide-react'
+import { Building2, Briefcase, FileText, MessageSquare, Lightbulb, ArrowLeft, Send, Loader2, Sparkles } from 'lucide-react'
 import API from '../utils/api'
 
 export default function NewExperience() {
@@ -53,49 +53,53 @@ export default function NewExperience() {
   }
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="container max-w-4xl mx-auto px-4 py-8"
-    >
+    <div className="container-lg py-8">
       {/* Header */}
-      <div className="mb-8">
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-12"
+      >
         <button
           onClick={() => navigate('/feed')}
-          className="btn btn-secondary mb-6 hover-lift"
+          className="btn btn-secondary mb-8 hover-lift"
         >
           <ArrowLeft size={18} />
           Back to Feed
         </button>
         
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <h1 className="text-4xl font-bold mb-4 text-gradient">
+        <div className="content-center">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="w-20 h-20 bg-gradient-to-br from-primary via-secondary to-accent rounded-full flex items-center justify-center mb-6 shadow-glow"
+          >
+            <Sparkles size={32} className="text-white" />
+          </motion.div>
+          
+          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
             Share Your Experience
           </h1>
-          <p className="text-lg text-text-secondary max-w-2xl">
+          <p className="text-xl text-text-secondary max-w-3xl leading-relaxed">
             Help fellow students by sharing your interview experience, insights, and tips. 
             Your story could be the guidance someone needs for their next opportunity.
           </p>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
 
       {/* Form */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="glass-card p-8 hover-lift"
+        className="glass-card p-8 hover-lift max-w-4xl mx-auto"
       >
         {error && (
           <motion.div 
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
-            className="error-message mb-6"
+            className="error-message mb-8"
           >
             {error}
           </motion.div>
@@ -103,14 +107,14 @@ export default function NewExperience() {
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Company & Role */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="form-grid-2">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
               className="form-group"
             >
-              <label htmlFor="company" className="flex items-center gap-2 mb-3">
+              <label htmlFor="company">
                 <Building2 size={18} className="text-primary" />
                 Company Name *
               </label>
@@ -131,7 +135,7 @@ export default function NewExperience() {
               transition={{ delay: 0.5 }}
               className="form-group"
             >
-              <label htmlFor="role" className="flex items-center gap-2 mb-3">
+              <label htmlFor="role">
                 <Briefcase size={18} className="text-primary" />
                 Job Role *
               </label>
@@ -154,7 +158,7 @@ export default function NewExperience() {
             transition={{ delay: 0.6 }}
             className="form-group"
           >
-            <label htmlFor="description" className="flex items-center gap-2 mb-3">
+            <label htmlFor="description">
               <FileText size={18} className="text-primary" />
               Experience Description *
             </label>
@@ -180,7 +184,7 @@ export default function NewExperience() {
             transition={{ delay: 0.7 }}
             className="form-group"
           >
-            <label htmlFor="interviewQuestions" className="flex items-center gap-2 mb-3">
+            <label htmlFor="interviewQuestions">
               <MessageSquare size={18} className="text-primary" />
               Interview Questions
             </label>
@@ -205,7 +209,7 @@ export default function NewExperience() {
             transition={{ delay: 0.8 }}
             className="form-group"
           >
-            <label htmlFor="tips" className="flex items-center gap-2 mb-3">
+            <label htmlFor="tips">
               <Lightbulb size={18} className="text-primary" />
               Tips & Advice
             </label>
@@ -223,12 +227,12 @@ export default function NewExperience() {
             </p>
           </motion.div>
 
-          {/* Submit Button */}
+          {/* Submit Actions */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9 }}
-            className="flex justify-end gap-4 pt-6 border-t border-glass-border"
+            className="form-actions form-actions-between"
           >
             <button
               type="button"
@@ -259,8 +263,8 @@ export default function NewExperience() {
         </form>
       </motion.div>
 
-      {/* Illustration/Background Elements */}
-      <div className="fixed top-20 right-10 opacity-10 pointer-events-none">
+      {/* Floating Background Elements */}
+      <div className="fixed top-20 right-10 opacity-5 pointer-events-none">
         <motion.div
           animate={{ 
             rotate: 360,
@@ -274,7 +278,7 @@ export default function NewExperience() {
         />
       </div>
       
-      <div className="fixed bottom-20 left-10 opacity-10 pointer-events-none">
+      <div className="fixed bottom-20 left-10 opacity-5 pointer-events-none">
         <motion.div
           animate={{ 
             y: [0, -20, 0],
@@ -288,6 +292,6 @@ export default function NewExperience() {
           className="w-24 h-24 rounded-lg bg-gradient-to-r from-accent to-success transform rotate-45"
         />
       </div>
-    </motion.div>
+    </div>
   )
 }

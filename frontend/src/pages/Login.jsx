@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { LogIn, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react'
+import { AlertCircle, Loader2, GraduationCap } from 'lucide-react'
 import API from '../utils/api'
 
 export default function Login({ onLogin }) {
@@ -54,77 +54,98 @@ export default function Login({ onLogin }) {
   }
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="container flex items-center justify-center min-h-[calc(100vh-100px)]"
-    >
-      <div className="glass-card w-full max-w-md p-8">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Welcome Back</h2>
-          <p className="text-text-secondary">Login to your CampusConnect account</p>
-        </div>
-        
-        {error && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            className="bg-red-50 text-red-600 p-4 rounded-lg mb-6 flex items-center gap-2 text-sm border border-red-100"
-          >
-            <AlertCircle size={16} />
-            <span>{error}</span>
-          </motion.div>
-        )}
-        
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-text-secondary mb-2">Email Address</label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={18} />
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-sm w-full space-y-8">
+        {/* Logo and Title */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center"
+        >
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-lg">
+              <GraduationCap size={32} className="text-white" />
+            </div>
+          </div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">CampusConnect</h1>
+          <p className="text-gray-600 text-sm">Connect with alumni and students</p>
+        </motion.div>
+
+        {/* Login Form */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="bg-white border border-gray-300 rounded-lg p-8"
+        >
+          {error && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md flex items-center gap-2 text-red-700 text-sm"
+            >
+              <AlertCircle size={16} />
+              <span>{error}</span>
+            </motion.div>
+          )}
+          
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
               <input 
-                id="email"
                 type="email"
-                className="pl-10" 
-                placeholder="your.email@example.com" 
+                placeholder="Email"
                 value={email} 
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
                 required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all"
               />
             </div>
-          </div>
-          
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-text-secondary mb-2">Password</label>
-            <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={18} />
+            
+            <div>
               <input 
-                id="password"
-                className="pl-10" 
-                placeholder="••••••••" 
-                type="password" 
+                type="password"
+                placeholder="Password"
                 value={password} 
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={isLoading}
                 required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all"
               />
             </div>
-          </div>
-          
-          <button 
-            type="submit"
-            className="btn btn-primary w-full py-3 text-lg"
-            disabled={isLoading}
-          >
-            {isLoading ? <Loader2 className="animate-spin" size={20} /> : 'Login'}
-          </button>
-        </form>
-        
-        <div className="mt-6 text-center text-sm text-text-secondary">
-          Don't have an account? <Link to="/signup" className="text-primary font-semibold hover:underline">Sign up</Link>
-        </div>
+            
+            <button 
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="animate-spin" size={16} />
+                  Signing in...
+                </>
+              ) : (
+                'Log in'
+              )}
+            </button>
+          </form>
+        </motion.div>
+
+        {/* Sign up link */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="bg-white border border-gray-300 rounded-lg p-6 text-center"
+        >
+          <p className="text-sm text-gray-600">
+            Don't have an account?{' '}
+            <Link to="/signup" className="text-blue-500 font-semibold hover:text-blue-600 transition-colors">
+              Sign up
+            </Link>
+          </p>
+        </motion.div>
       </div>
-    </motion.div>
+    </div>
   )
 }
