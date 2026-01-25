@@ -55,19 +55,19 @@ export default function Login({ onLogin }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-xs">
+      <div className="w-full max-w-[280px]">
         {/* Logo and Title */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-6"
+          className="text-center mb-4"
         >
-          <div className="flex justify-center mb-3">
-            <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-              <GraduationCap size={24} className="text-white" />
+          <div className="flex justify-center mb-2">
+            <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
+              <GraduationCap size={20} className="text-white" />
             </div>
           </div>
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-1">
+          <h1 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-1">
             CampusConnect
           </h1>
           <p className="text-gray-500 text-xs">Connect • Learn • Grow</p>
@@ -78,52 +78,48 @@ export default function Login({ onLogin }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white/80 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl"
+          className="bg-white/80 backdrop-blur-lg border border-white/20 rounded-xl p-4 shadow-xl"
         >
           {error && (
             <motion.div 
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
-              className="mb-3 p-2 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-red-600 text-xs"
+              className="mb-2 p-2 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-red-600 text-xs"
             >
-              <AlertCircle size={14} />
+              <AlertCircle size={12} />
               <span>{error}</span>
             </motion.div>
           )}
           
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <div>
-              <input 
-                type="email"
-                placeholder="Email"
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={isLoading}
-                required
-                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm bg-gray-50/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 focus:bg-white transition-all placeholder-gray-400"
-              />
-            </div>
+          <form onSubmit={handleSubmit} className="space-y-2">
+            <input 
+              type="email"
+              placeholder="Email"
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={isLoading}
+              required
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-xs bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 focus:border-purple-400 focus:bg-white transition-all placeholder-gray-400"
+            />
             
-            <div>
-              <input 
-                type="password"
-                placeholder="Password"
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={isLoading}
-                required
-                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm bg-gray-50/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 focus:bg-white transition-all placeholder-gray-400"
-              />
-            </div>
+            <input 
+              type="password"
+              placeholder="Password"
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={isLoading}
+              required
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-xs bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-purple-500/20 focus:border-purple-400 focus:bg-white transition-all placeholder-gray-400"
+            />
             
             <button 
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-medium py-2 px-4 rounded-lg text-xs transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] mt-3"
             >
               {isLoading ? (
                 <>
-                  <Loader2 className="animate-spin" size={16} />
+                  <Loader2 className="animate-spin" size={14} />
                   Signing in...
                 </>
               ) : (
@@ -138,7 +134,7 @@ export default function Login({ onLogin }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white/60 backdrop-blur-lg border border-white/20 rounded-2xl p-4 text-center mt-4 shadow-lg"
+          className="bg-white/60 backdrop-blur-lg border border-white/20 rounded-xl p-3 text-center mt-3 shadow-lg"
         >
           <p className="text-xs text-gray-600">
             Don't have an account?{' '}
