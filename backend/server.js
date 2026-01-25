@@ -27,6 +27,7 @@ const corsOptions = {
       process.env.FRONTEND_URL || 'http://localhost:5173',
       'http://localhost:5173', // Development
       'http://localhost:3000', // Alternative dev port
+      'https://campus-connect-aoop.vercel.app', // Your Vercel deployment
     ];
     
     // Add production frontend URL if it exists
@@ -34,10 +35,17 @@ const corsOptions = {
       allowedOrigins.push(process.env.PRODUCTION_FRONTEND_URL);
     }
     
+    console.log('CORS check - Origin:', origin, 'Allowed:', allowedOrigins);
+    
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
+      console.log('CORS blocked origin:', origin);
       callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+};
     }
   },
   credentials: true
@@ -105,11 +113,26 @@ const io = new Server(server, {
         process.env.FRONTEND_URL || 'http://localhost:5173',
         'http://localhost:5173', // Development
         'http://localhost:3000', // Alternative dev port
+        'https://campus-connect-aoop.vercel.app', // Your Vercel deployment
       ];
       
       // Add production frontend URL if it exists
       if (process.env.PRODUCTION_FRONTEND_URL) {
         allowedOrigins.push(process.env.PRODUCTION_FRONTEND_URL);
+      }
+      
+      console.log('Socket CORS check - Origin:', origin, 'Allowed:', allowedOrigins);
+      
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        console.log('Socket CORS blocked origin:', origin);
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true
+  }
+});
       }
       
       if (allowedOrigins.indexOf(origin) !== -1) {
