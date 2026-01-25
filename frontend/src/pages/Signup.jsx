@@ -70,21 +70,23 @@ export default function Signup({ onSignup }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-sm w-full space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-xs">
         {/* Logo and Title */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center"
+          className="text-center mb-6"
         >
-          <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-lg">
-              <GraduationCap size={32} className="text-white" />
+          <div className="flex justify-center mb-3">
+            <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+              <GraduationCap size={24} className="text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">CampusConnect</h1>
-          <p className="text-gray-600 text-sm">Sign up to connect with alumni and students</p>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-1">
+            CampusConnect
+          </h1>
+          <p className="text-gray-500 text-xs">Join the community</p>
         </motion.div>
 
         {/* Signup Form */}
@@ -92,20 +94,20 @@ export default function Signup({ onSignup }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white border border-gray-300 rounded-lg p-8"
+          className="bg-white/80 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl"
         >
           {error && (
             <motion.div 
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
-              className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md flex items-center gap-2 text-red-700 text-sm"
+              className="mb-3 p-2 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-red-600 text-xs"
             >
-              <AlertCircle size={16} />
+              <AlertCircle size={14} />
               <span>{error}</span>
             </motion.div>
           )}
           
-          <form onSubmit={handleSubmit} className="space-y-3">
+          <form onSubmit={handleSubmit} className="space-y-2.5">
             <input 
               name="name" 
               placeholder="Full name"
@@ -113,7 +115,7 @@ export default function Signup({ onSignup }) {
               onChange={handleChange}
               disabled={isLoading}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 focus:bg-white transition-all placeholder-gray-400"
             />
             
             <input 
@@ -124,21 +126,21 @@ export default function Signup({ onSignup }) {
               onChange={handleChange}
               disabled={isLoading}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 focus:bg-white transition-all placeholder-gray-400"
             />
             
             <input 
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder="Password (min 6 chars)"
               value={form.password} 
               onChange={handleChange}
               disabled={isLoading}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 focus:bg-white transition-all placeholder-gray-400"
             />
             
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2">
               <input 
                 name="department" 
                 placeholder="Department"
@@ -146,7 +148,7 @@ export default function Signup({ onSignup }) {
                 onChange={handleChange}
                 disabled={isLoading}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 focus:bg-white transition-all placeholder-gray-400"
               />
               
               <input 
@@ -156,7 +158,7 @@ export default function Signup({ onSignup }) {
                 onChange={handleChange}
                 disabled={isLoading}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 focus:bg-white transition-all placeholder-gray-400"
               />
             </div>
             
@@ -165,7 +167,7 @@ export default function Signup({ onSignup }) {
               value={form.role} 
               onChange={handleChange}
               disabled={isLoading}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:bg-white transition-all"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50/50 focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-400 focus:bg-white transition-all"
             >
               <option value="student">Student</option>
               <option value="alumni">Alumni</option>
@@ -174,7 +176,7 @@ export default function Signup({ onSignup }) {
             <button 
               type="submit"
               disabled={isLoading}
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-4"
+              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:scale-[1.02] mt-3"
             >
               {isLoading ? (
                 <>
@@ -187,8 +189,8 @@ export default function Signup({ onSignup }) {
             </button>
           </form>
           
-          <p className="text-xs text-gray-500 text-center mt-4 leading-relaxed">
-            By signing up, you agree to our Terms, Data Policy and Cookies Policy.
+          <p className="text-xs text-gray-400 text-center mt-3 leading-relaxed">
+            By signing up, you agree to our Terms & Privacy Policy.
           </p>
         </motion.div>
 
@@ -197,11 +199,11 @@ export default function Signup({ onSignup }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white border border-gray-300 rounded-lg p-6 text-center"
+          className="bg-white/60 backdrop-blur-lg border border-white/20 rounded-2xl p-4 text-center mt-4 shadow-lg"
         >
-          <p className="text-sm text-gray-600">
+          <p className="text-xs text-gray-600">
             Have an account?{' '}
-            <Link to="/login" className="text-blue-500 font-semibold hover:text-blue-600 transition-colors">
+            <Link to="/login" className="text-purple-600 font-semibold hover:text-purple-700 transition-colors">
               Log in
             </Link>
           </p>
