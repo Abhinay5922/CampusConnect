@@ -46,10 +46,6 @@ const corsOptions = {
   },
   credentials: true
 };
-    }
-  },
-  credentials: true
-};
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -127,17 +123,6 @@ const io = new Server(server, {
         callback(null, true);
       } else {
         console.log('Socket CORS blocked origin:', origin);
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true
-  }
-});
-      }
-      
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
         callback(new Error('Not allowed by CORS'));
       }
     },
